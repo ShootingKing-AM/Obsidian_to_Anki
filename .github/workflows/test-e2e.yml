@@ -34,6 +34,7 @@ jobs:
           npm run test
 
       - name: Package
+        if: always()
         run: |
           mkdir ${{ env.PLUGIN_NAME }}
           cp main.js manifest.json styles.css README.md ${{ env.PLUGIN_NAME }}
@@ -47,7 +48,10 @@ jobs:
             logs/test-reports/**/*.xml
       
       - uses: iterative/setup-cml@v1
+        if: always()
+      
       - name: Publish Screenshots
+        if: always()
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -66,6 +70,7 @@ jobs:
           cml comment create --publish comment.md
             
       - name: Upload build artifacts
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.PLUGIN_NAME }}
