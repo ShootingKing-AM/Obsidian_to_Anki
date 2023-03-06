@@ -12,12 +12,12 @@ ls -alh /config/ >> /config/logs/gnome.log
 ls -alh "/config/.local/share/Anki2/User 1/" >> /config/logs/gnome.log
 
 
-echo "abc" | sudo -S chown -R abc:abc \
+echo "abc" | sudo -S chown -R 1000:1000 \
     /config \
     /vaults \
     /squashfs-root
 
-echo "abc" | sudo -S chmod 775 -R abc:abc \
+echo "abc" | sudo -S chmod 775 -R 1000:1000 \
     /config \
     /vaults \
     /squashfs-root
