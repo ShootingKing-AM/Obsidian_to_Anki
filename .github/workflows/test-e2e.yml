@@ -50,7 +50,17 @@ jobs:
       - uses: iterative/setup-cml@v1
         if: always()
       
-      - name: Publish Screenshots
+      - name: Publish Screenshots - Find Comment
+        if: always()
+        uses: peter-evans/find-comment@v2
+        id: fc
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: '# 📷 Screenshots of tests:'
+          direction: last
+          comment-author: github-actions
+      
+      - name: Publish Screenshots - Make comment
         if: always()
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -60,24 +70,36 @@ jobs:
 
           echo "<details><summary>Obsidian Pre-Test</summary>" >> comment.md
           echo '<p float="left">' >> comment.md
-          echo '![](./logs/obs_post_test.png)' >> comment.md
+          cml-publish "logs/obs_post_test.png" | sed -E 's/.+/<img width="45%" src="\0"\/>/' >> comment.md
+          # echo '![](./logs/obs_post_test.png)' >> comment.md
           echo '</p></details>' >> comment.md
 
           echo -n '<details><summary>Obsidian Pre-Test</summary>' >> comment.md
           echo '<p float="left">' >> comment.md
-          echo '![](./logs/obs_pre_test.png)' >> comment.md
+          cml-publish "logs/obs_pre_test.png" | sed -E 's/.+/<img width="45%" src="\0"\/>/' >> comment.md
+          # echo '![](./logs/obs_pre_test.png)' >> comment.md
           echo '</p></details>' >> comment.md
 
           for ss in tests/test_config/Screenshot*; do 
             echo -n '<details><summary>SS</summary>' >> comment.md
             echo '<p float="left">' >> comment.md
             cml-publish "$ss" | sed -E 's/.+/<img width="45%" src="\0"\/>/' >> comment.md
-            echo "![](./$ss)" >> comment.md
+            # echo "![](./$ss)" >> comment.md
             echo '</p></details>' >> comment.md
           done
 
-          cml comment create --publish comment.md
-            
+          # cml comment create --publish comment.md
+      
+      - name: Publish Screehnshots - Update Comment
+        # if: ${{ steps.fc.outputs.comment-id }} == ''
+        if: always()
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          body-file: comment.md
+          edit-mode: replace
+          issue-number: ${{ github.event.number }}
+
       - name: Upload build artifacts
         if: always()
         uses: actions/upload-artifact@v3
