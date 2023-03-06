@@ -83,6 +83,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         # if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && always()
         if: always()
+
         with:
           report_individual_runs: true
           report_suite_logs: 'any'
