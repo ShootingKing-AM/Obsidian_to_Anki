@@ -74,35 +74,35 @@ jobs:
           echo "# 📷 Screenshots of tests:" >> comment.md
           echo "" >> comment.md
 
-          for ss_test in tests/test_config/*.png; do 
-            ss_test=$(basename "$ss_test" .png)
-            echo -n "<details><summary>$ss_test</summary>" >> comment.md
+          for ss_test in tests/test_config/*.png logs/*.png; do 
+            ss_test_desc=$(basename "$ss_test" .png)
+            echo -n "<details><summary>$ss_test_desc</summary>" >> comment.md
             echo '<p float="left">' >> comment.md
             cml-publish "$ss_test" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
             # echo "![](./$ss_test)" >> comment.md
             echo '</p></details>' >> comment.md
           done
 
-          for ss_test in logs/*.png; do 
-            ss_test=$(basename "$ss_test" .png)
-            echo -n "<details><summary>$ss_test</summary>" >> comment.md
-            echo '<p float="left">' >> comment.md
-            cml-publish "$ss_test" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
-            # echo "![](./$ss_test)" >> comment.md
-            echo '</p></details>' >> comment.md
-          done
+          # for ss_test in logs/*.png; do 
+          #   ss_test=$(basename "$ss_test" .png)
+          #   echo -n "<details><summary>$ss_test</summary>" >> comment.md
+          #   echo '<p float="left">' >> comment.md
+          #   cml-publish "$ss_test" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
+          #   # echo "![](./$ss_test)" >> comment.md
+          #   echo '</p></details>' >> comment.md
+          # done
 
-          # if [ "$EVENT" == 'pull_request' ]
-          # then
-          #   sha=${{ github.event.pull_request.head.sha}}
-          # elif [ "$EVENT" == 'workflow_run' ]
-          # then
-          #   sha=${{ github.event.workflow_run.head_sha}}
-          # else
-          #   sha=$GITHUB_SHA
-          # fi          
-          # echo -n "[^-]: For commit $sha" >> comment.md
-          # cml comment create --publish comment.md
+          if [ "$EVENT" == 'pull_request' ]
+          then
+            sha=${{ github.event.pull_request.head.sha}}
+          elif [ "$EVENT" == 'workflow_run' ]
+          then
+            sha=${{ github.event.workflow_run.head_sha}}
+          else
+            sha=$GITHUB_SHA
+          fi          
+          echo -n "[^-]: For commit $sha" >> comment.md
+          cml comment create --publish comment.md
       
       - name: Publish Screehnshots - Update Comment
         # if: ${{ steps.fc.outputs.comment-id }} == ''
