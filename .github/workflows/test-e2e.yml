@@ -82,12 +82,12 @@ jobs:
           # # echo '![](./logs/obs_pre_test.png)' >> comment.md
           # echo '</p></details>' >> comment.md
 
-          for ss in tests/test_config/*.png logs/*.png; do 
-            ss = $(basename "$ss" .png)
-            echo -n "<details><summary>$ss</summary>" >> comment.md
+          for ss_test in tests/test_config/*.png logs/*.png; do 
+            ss_test = $(basename "$ss_test" .png)
+            echo -n "<details><summary>$ss_test</summary>" >> comment.md
             echo '<p float="left">' >> comment.md
-            cml-publish "$ss" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
-            # echo "![](./$ss)" >> comment.md
+            cml-publish "$ss_test" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
+            # echo "![](./$ss_test)" >> comment.md
             echo '</p></details>' >> comment.md
           done
 
