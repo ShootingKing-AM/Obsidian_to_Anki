@@ -31,11 +31,14 @@ jobs:
       - name: Run Tests
         run: | 
           # npm run copy
-          npm run test
+          # npm run test
+          npm run test-wdio
 
           ls -alh
           ls -alh tests/test_config/
           ls -alh "tests/test_config/.local/share/Anki2/User 1/"
+
+          sudo npm run test-py
 
       - name: Package
         if: always()
