@@ -67,6 +67,14 @@ jobs:
           echo '<p float="left">' >> comment.md
           echo '![](./logs/obs_pre_test.png)' >> comment.md
           echo '</p></details>' >> comment.md
+
+          for ss in tests/test_config/Screenshot*; do 
+            echo -n '"<details><summary>SS</summary>"' >> comment.md
+            echo '<p float="left">' >> comment.md
+            echo "![](./$ss)" >> comment.md
+            echo '</p></details>' >> comment.md
+          done
+
           cml comment create --publish comment.md
             
       - name: Upload build artifacts
