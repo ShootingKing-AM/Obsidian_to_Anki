@@ -71,7 +71,7 @@ jobs:
           for ss in tests/test_config/Screenshot*; do 
             echo -n '<details><summary>SS</summary>' >> comment.md
             echo '<p float="left">' >> comment.md
-            cml-publish $ss | sed -E 's/.+/<img width="45%" src="\0"\/>/' >> comment.md
+            cml-publish "$ss" | sed -E 's/.+/<img width="45%" src="\0"\/>/' >> comment.md
             echo "![](./$ss)" >> comment.md
             echo '</p></details>' >> comment.md
           done
