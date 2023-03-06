@@ -43,6 +43,7 @@ jobs:
           ref: 'refs/pull/${{ github.event.client_payload.pull_request.number }}/merge'
 
   Test:
+    if: always()
     needs: [checkout-trusted, checkout-signed]
     runs-on: ubuntu-latest
 
@@ -178,7 +179,6 @@ jobs:
     
   MapjobStatus:
     needs: [Test]
-    if: always()
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'repository_dispatch' &&
