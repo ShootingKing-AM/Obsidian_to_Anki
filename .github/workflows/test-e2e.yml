@@ -33,6 +33,10 @@ jobs:
           # npm run copy
           npm run test
 
+          ls -alh
+          ls -alh tests/test_config/
+          ls -alh "tests/test_config/.local/share/Anki2/User 1/"
+
       - name: Package
         if: always()
         run: |
