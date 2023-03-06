@@ -178,6 +178,7 @@ jobs:
     
   MapjobStatus:
     needs: [Test]
+    if: always()
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'repository_dispatch' &&
