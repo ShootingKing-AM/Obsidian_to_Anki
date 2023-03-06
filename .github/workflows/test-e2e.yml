@@ -30,7 +30,7 @@ jobs:
       
       - name: Run Tests
         run: | 
-          npm run copy
+          # npm run copy
           npm run test
 
       - name: Package
