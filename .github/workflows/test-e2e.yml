@@ -234,7 +234,7 @@ jobs:
           issue-number: ${{ github.event.client_payload.pull_request.number }}
           body-includes: '# 📷 Screenshots of tests:'
           direction: last
-          # commit: ${{ github.event.client_payload.pull_request.head.sha }}
+          commit: ${{ github.event.client_payload.pull_request.head.sha }}
           # github_token: ${{  }}
           comment-author: 'github-actions[bot]'
       
