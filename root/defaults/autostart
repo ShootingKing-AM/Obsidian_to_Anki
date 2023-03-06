@@ -5,7 +5,7 @@ mkdir /config/logs
 (sleep 2s && export LANG="LANG=C.UTF-8";LANGUAGE="en_US.UTF-8";LC_CTYPE="C.UTF-8" anki >> /config/logs/anki.log) &
 (sleep 8s && echo "Executing PreTest ss" >> /config/logs/gnome.log && gnome-screenshot >> /config/logs/gnome.log) &
 
-ls -alh /defaults/
+ls -alh /defaults/ >> /config/logs/obsidian.log
 
 (sleep 10s && /defaults/obsidian_anki >> /config/logs/obsidian.log) & 
 # (sleep 5s && cd /obs_to_anki/ && npm run wdio >> logs/npm.log)
