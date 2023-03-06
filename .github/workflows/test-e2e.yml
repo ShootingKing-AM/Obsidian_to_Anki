@@ -89,18 +89,16 @@ jobs:
             echo '</p></details>' >> comment.md
           done
 
-          if [ "$EVENT" == 'pull_request' ]
-          then
-            sha = ${{ github.event.pull_request.head.sha}}
-          elif [ "$EVENT" == 'workflow_run' ]
-          then
-            sha = ${{ github.event.workflow_run.head_sha}}
-          else
-            sha = $GITHUB_SHA
-          fi
-          
-          echo -n "[^-]: For commit $sha" >> comment.md
-
+          # if [ "$EVENT" == 'pull_request' ]
+          # then
+          #   sha = ${{ github.event.pull_request.head.sha}}
+          # elif [ "$EVENT" == 'workflow_run' ]
+          # then
+          #   sha = ${{ github.event.workflow_run.head_sha}}
+          # else
+          #   sha = $GITHUB_SHA
+          # fi          
+          # echo -n "[^-]: For commit $sha" >> comment.md
           # cml comment create --publish comment.md
       
       - name: Publish Screehnshots - Update Comment
