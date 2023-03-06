@@ -7,11 +7,11 @@ mkdir -p /config/logs
 
 ls -alh /defaults/ >> /config/logs/obsidian.log
 
-chmod +x /defaults/obsidian_anki
+sudo chmod +x /defaults/obsidian_anki.sh
 
 ls -alh /defaults/ >> /config/logs/obsidian.log
 
-(sleep 10s && /defaults/obsidian_anki >> /config/logs/obsidian.log) & 
+(sleep 10s && /defaults/obsidian_anki.sh >> /config/logs/obsidian.log) & 
 # (sleep 5s && cd /obs_to_anki/ && npm run wdio >> logs/npm.log)
 
 (sleep 12s && sudo /etc/init.d/ssh start >> /config/logs/sshd.log )

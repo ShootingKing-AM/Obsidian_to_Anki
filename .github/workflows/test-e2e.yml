@@ -113,3 +113,4 @@ jobs:
             tests/test_config/logs/*
             tests/test_config/*.png
             tests/test_config/.config/obsidian
+            tests/test_config/.xsession-errors
