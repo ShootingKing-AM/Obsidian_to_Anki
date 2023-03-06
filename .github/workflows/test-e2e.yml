@@ -89,7 +89,9 @@ jobs:
             # # echo "![](./$ss_test)" >> comment.md
             # echo '</p></details>' >> comment.md
 
-            echo "#### $ss_test_desc" >> comment.md
+            echo "" >> comment.md
+            echo "### $ss_test_desc" >> comment.md
+            echo "" >> comment.md
             echo '<p float="left">' >> comment.md
             cml-publish "$ss_test" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
             # echo "![](./$ss_test)" >> comment.md
