@@ -11,6 +11,21 @@ ls -alh >> /config/logs/gnome.log
 ls -alh /config/ >> /config/logs/gnome.log
 ls -alh "/config/.local/share/Anki2/User 1/" >> /config/logs/gnome.log
 
+
+echo "abc" | sudo -S chown -R abc:abc \
+    /config \
+    /vaults \
+    /squashfs-root
+
+echo "abc" | sudo -S chmod 775 -R abc:abc \
+    /config \
+    /vaults \
+    /squashfs-root
+
+ls -alh >> /config/logs/gnome.log
+ls -alh /config/ >> /config/logs/gnome.log
+ls -alh "/config/.local/share/Anki2/User 1/" >> /config/logs/gnome.log
+
 sleep 2s
 
 pkill anki

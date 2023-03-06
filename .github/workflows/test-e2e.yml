@@ -83,15 +83,6 @@ jobs:
             echo '</p></details>' >> comment.md
           done
 
-          # for ss_test in logs/*.png; do 
-          #   ss_test=$(basename "$ss_test" .png)
-          #   echo -n "<details><summary>$ss_test</summary>" >> comment.md
-          #   echo '<p float="left">' >> comment.md
-          #   cml-publish "$ss_test" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
-          #   # echo "![](./$ss_test)" >> comment.md
-          #   echo '</p></details>' >> comment.md
-          # done
-
           if [ "$EVENT" == 'pull_request' ]
           then
             sha=${{ github.event.pull_request.head.sha}}
@@ -101,8 +92,7 @@ jobs:
           else
             sha=$GITHUB_SHA
           fi          
-          echo -n "[^-]: For commit $sha" >> comment.md
-          cml comment create --publish comment.md
+          echo -n "###### For commit $sha" >> comment.md
       
       - name: Publish Screehnshots - Update Comment
         # if: ${{ steps.fc.outputs.comment-id }} == ''
