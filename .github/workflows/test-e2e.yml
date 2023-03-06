@@ -67,8 +67,7 @@ jobs:
       #   with:
       #     name: JUnit Reprot
       #     path: logs/test-reports/wdio.xml
-      #     reporter: jest-junit
-      
+      #     reporter: jest-junit      
       - uses: iterative/setup-cml@v1
         if: always()
       
