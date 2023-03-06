@@ -175,7 +175,7 @@ jobs:
             tests/test_config/*.png
             # tests/test_config/.xsession-errors
     
-  Map job Status:
+  MapjobStatus:
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'repository_dispatch' &&
