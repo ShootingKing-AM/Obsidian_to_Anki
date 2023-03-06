@@ -66,21 +66,10 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EVENT: ${{ github.event_name }}
           REF: ${{ github.ref }}
+        shell: bash
         run: |
           echo "# 📷 Screenshots of tests:" >> comment.md
           echo "" >> comment.md
-
-          # echo "<details><summary>Obsidian Pre-Test</summary>" >> comment.md
-          # echo '<p float="left">' >> comment.md
-          # cml-publish "logs/obs_post_test.png" | sed -E 's/.+/<img width="75%" src="\0"\/>/' >> comment.md
-          # # echo '![](./logs/obs_post_test.png)' >> comment.md
-          # echo '</p></details>' >> comment.md
-
-          # echo -n '<details><summary>Obsidian Pre-Test</summary>' >> comment.md
-          # echo '<p float="left">' >> comment.md
-          # cml-publish "logs/obs_pre_test.png" | sed -E 's/.+/<img width="75%" src="\0"\/>/' >> comment.md
-          # # echo '![](./logs/obs_pre_test.png)' >> comment.md
-          # echo '</p></details>' >> comment.md
 
           for ss_test in tests/test_config/*.png logs/*.png; do 
             ss_test = $(basename "$ss_test" .png)
