@@ -46,7 +46,7 @@ jobs:
           cp main.js manifest.json styles.css README.md ${{ env.PLUGIN_NAME }}
           zip -r ${{ env.PLUGIN_NAME }}.zip ${{ env.PLUGIN_NAME }}
 
-      - name: Publish Test Results
+      - name: Publish Test Results Comment
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
@@ -55,6 +55,14 @@ jobs:
           deduplicate_classes_by_file_name: true
           files: |
             logs/test-reports/**/*.xml
+
+      - name: Publish Test Results
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: JUnit Reprot
+          path: logs/test-reports/**/*.xml
+          reporter: jest-junit
       
       - uses: iterative/setup-cml@v1
         if: always()
