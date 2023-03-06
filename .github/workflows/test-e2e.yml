@@ -58,7 +58,7 @@ jobs:
           issue-number: ${{ github.event.number }}
           body-includes: '# 📷 Screenshots of tests:'
           direction: last
-          comment-author: github-actions
+          comment-author: 'github-actions[bot]'
       
       - name: Publish Screenshots - Make comment
         if: always()
@@ -87,6 +87,8 @@ jobs:
             # echo "![](./$ss)" >> comment.md
             echo '</p></details>' >> comment.md
           done
+
+          echo -n "[^-]: For commit ${{ github.event.workflow_run.head_sha }}"
 
           # cml comment create --publish comment.md
       
