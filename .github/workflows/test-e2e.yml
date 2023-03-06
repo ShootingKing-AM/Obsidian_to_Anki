@@ -88,3 +88,4 @@ jobs:
             logs/*
             tests/test_config/logs/*
             tests/test_config/*.png
+            tests/test_config/.config/obsidian
