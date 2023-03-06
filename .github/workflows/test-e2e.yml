@@ -50,22 +50,21 @@ jobs:
       - name: Publish Screenshots
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                echo "Screenshots of tests:" >> comment.md
-                echo "" >> comment.md  # just for the newline
+        run: |
+          echo "Screenshots of tests:" >> comment.md
+          echo "" >> comment.md  # just for the newline
 
-                echo "<details><summary>Obsidian Pre-Test</summary>" >> comment.md
-                echo '<p float="left">' >> comment.md
-                echo '![](logs/obs_post_test.png)' >> comment.md
-                echo '</p></details>' >> comment.md
+          echo "<details><summary>Obsidian Pre-Test</summary>" >> comment.md
+          echo '<p float="left">' >> comment.md
+          echo '![](logs/obs_post_test.png)' >> comment.md
+          echo '</p></details>' >> comment.md
 
-                echo -n '"<details><summary>Obsidian Pre-Test</summary>"' >> comment.md
-                echo '<p float="left">' >> comment.md
-                echo '![](logs/obs_pre_test.png)' >> comment.md
-                echo '</p></details>' >> comment.md
-                cml comment create --publish comment.md
-      
-      
+          echo -n '"<details><summary>Obsidian Pre-Test</summary>"' >> comment.md
+          echo '<p float="left">' >> comment.md
+          echo '![](logs/obs_pre_test.png)' >> comment.md
+          echo '</p></details>' >> comment.md
+          cml comment create --publish comment.md
+            
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
