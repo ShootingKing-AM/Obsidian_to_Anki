@@ -1,5 +1,7 @@
 xset -b
 
+sudo -u abc
+
 mkdir -p /config/logs
 
 (sleep 2s && export LANG="LANG=C.UTF-8";LANGUAGE="en_US.UTF-8";LC_CTYPE="C.UTF-8" anki >> /config/logs/anki.log) &
