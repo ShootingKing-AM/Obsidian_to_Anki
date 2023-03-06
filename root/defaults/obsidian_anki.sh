@@ -6,6 +6,11 @@ echo "Starting Obsisidan .... " >> /config/logs/obsidian.log
 echo "Obsisidan Ended .... " >> /config/logs/obsidian.log
 
 (sleep 2s && echo "Executing PostTest ss" >> /config/logs/gnome.log && gnome-screenshot >> /config/logs/gnome.log && rename 's/Screenshot from .*/Anki PostTest.png/' /config/*.png) &
+
+ls -alh >> /config/logs/gnome.log
+ls -alh /config/ >> /config/logs/gnome.log
+ls -alh "/config/.local/share/Anki2/User 1/" >> /config/logs/gnome.log
+
 sleep 2s
 
 pkill anki
