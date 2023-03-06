@@ -64,31 +64,42 @@ jobs:
         if: always()
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT: ${{ github.event_name }}
+          REF: ${{ github.ref }}
         run: |
           echo "# 📷 Screenshots of tests:" >> comment.md
           echo "" >> comment.md  # just for the newline
 
           echo "<details><summary>Obsidian Pre-Test</summary>" >> comment.md
           echo '<p float="left">' >> comment.md
-          cml-publish "logs/obs_post_test.png" | sed -E 's/.+/<img width="45%" src="\0"\/>/' >> comment.md
+          cml-publish "logs/obs_post_test.png" | sed -E 's/.+/<img width="75%" src="\0"\/>/' >> comment.md
           # echo '![](./logs/obs_post_test.png)' >> comment.md
           echo '</p></details>' >> comment.md
 
           echo -n '<details><summary>Obsidian Pre-Test</summary>' >> comment.md
           echo '<p float="left">' >> comment.md
-          cml-publish "logs/obs_pre_test.png" | sed -E 's/.+/<img width="45%" src="\0"\/>/' >> comment.md
+          cml-publish "logs/obs_pre_test.png" | sed -E 's/.+/<img width="75%" src="\0"\/>/' >> comment.md
           # echo '![](./logs/obs_pre_test.png)' >> comment.md
           echo '</p></details>' >> comment.md
 
           for ss in tests/test_config/Screenshot*; do 
             echo -n '<details><summary>SS</summary>' >> comment.md
             echo '<p float="left">' >> comment.md
-            cml-publish "$ss" | sed -E 's/.+/<img width="45%" src="\0"\/>/' >> comment.md
+            cml-publish "$ss" | sed -E 's/.+/<img width="75%" src="\0"\/>/' >> comment.md
             # echo "![](./$ss)" >> comment.md
             echo '</p></details>' >> comment.md
           done
 
-          echo -n "[^-]: For commit ${{ github.event.workflow_run.head_sha }}"
+          if [ "$EVENT" == 'pull_request' ]
+          then
+            echo "::set-output name=sha::$(echo ${{github.event.pull_request.head.sha}})" >> $sha
+          elif [ "$EVENT" == 'workflow_run' ]
+          then
+            echo "::set-output name=sha::$(echo ${{github.event.workflow_run.head_sha}})" >> $sha
+          else
+            echo "::set-output name=sha::$(echo $GITHUB_SHA)" >> $sha
+          fi
+          echo -n "[^-]: For commit $sha" >> comment.md
 
           # cml comment create --publish comment.md
       
