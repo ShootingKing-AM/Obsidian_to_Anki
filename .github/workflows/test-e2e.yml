@@ -61,7 +61,7 @@ jobs:
         if: success() || failure()
         with:
           name: JUnit Reprot
-          path: logs/test-reports/**/*.xml
+          path: logs/test-reports/wdio.xml
           reporter: jest-junit
       
       - uses: iterative/setup-cml@v1
