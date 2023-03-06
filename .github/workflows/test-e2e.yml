@@ -60,12 +60,12 @@ jobs:
 
           echo "<details><summary>Obsidian Pre-Test</summary>" >> comment.md
           echo '<p float="left">' >> comment.md
-          echo '![](logs/obs_post_test.png)' >> comment.md
+          echo '![](./logs/obs_post_test.png)' >> comment.md
           echo '</p></details>' >> comment.md
 
           echo -n '"<details><summary>Obsidian Pre-Test</summary>"' >> comment.md
           echo '<p float="left">' >> comment.md
-          echo '![](logs/obs_pre_test.png)' >> comment.md
+          echo '![](./logs/obs_pre_test.png)' >> comment.md
           echo '</p></details>' >> comment.md
           cml comment create --publish comment.md
             
