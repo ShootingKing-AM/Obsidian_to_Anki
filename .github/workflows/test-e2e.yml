@@ -110,7 +110,8 @@ jobs:
             echo "$ss_test - $ss_test_desc"
             echo "" >> comment.md
 
-            echo '<details><summary>Pre Test</summary>' >> comment.md
+            # echo '<details><summary>Pre Test</summary>' >> comment.md
+            echo '#### Pre Test' >> comment.md
 
             for ss in "$ss_test"*Pre*.png; do 
               echo '<p float="left">' >> comment.md
@@ -119,7 +120,9 @@ jobs:
               echo '</p>' >> comment.md
             done 
             
-            echo '</details><details><summary>Post Test</summary>' >> comment.md
+            echo "" >> comment.md
+            # echo '</details><details><summary>Post Test</summary>' >> comment.md
+            echo '#### Post Test' >> comment.md
 
             for ss in "$ss_test"*Post*.png; do 
               echo '<p float="left">' >> comment.md
@@ -128,7 +131,8 @@ jobs:
               echo '</p>' >> comment.md
             done 
 
-            echo '</details>' >> comment.md
+            # echo '</details>' >> comment.md
+            echo "" >> comment.md
           done
 
           # for ss_test in tests/test_config/*.png logs/*.png; do 
