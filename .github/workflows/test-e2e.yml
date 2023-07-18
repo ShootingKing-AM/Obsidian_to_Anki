@@ -114,8 +114,8 @@ jobs:
             for ss in "$ss_test"*Pre*.png; do 
               echo '<p float="left">' >> comment.md
               echo "  $ss -> ${ss// /_}"
-              mv "$ss" "${ss// /_}"
-              cml-publish "${ss// /_}" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
+              sudo mv "$ss" "${ss// /_}"
+              sudo cml-publish "${ss// /_}" | sed -E 's/.+/<img width="90%" src="\0"\/>/' >> comment.md
               echo '</p>' >> comment.md
             done 
             
