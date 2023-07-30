@@ -24,7 +24,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      # obsidian package often fails integrity checks since its a tarball, hence will get the 
+      # obsidian package often fails integrity checks since its a tarball, hence will get the get the tarball -> npm will cache it -> npm ci will test integrity of that cache vs package-lock.json 
+      # https://github.com/ShootingKing-AM/Obsidian_to_Anki/pull/122
       - run: |
           npm install obsidian 
           npm ci
