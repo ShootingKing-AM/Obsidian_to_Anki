@@ -24,7 +24,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      # obsidian package often fails integrity checks since its a tarball, hence will get the 
+      - run: |
+          npm install obsidian 
+          npm ci
       - run: npm run build --if-present
       # - run: npm test
       
