@@ -38,6 +38,7 @@ jobs:
       - name: Node install latest tree
         if: matrix.install-exact == 0
         run: |
+          npm update
           npm install
 
       - run: npm run build --if-present
