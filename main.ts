@@ -199,8 +199,8 @@ export default class MyPlugin extends Plugin {
     if (scanDir !== null) {
       let markdownFiles = [];
       if (scanDir instanceof TFolder) {
-        new Notice("Using custom scan directory...")
-        markdownFiles = this.getAllTFilesInFolder(ankiScanDir);
+        console.info("Using custom scan directory: " + scanDir.path)
+        markdownFiles = this.getAllTFilesInFolder(scanDir);
       } else {
         new Notice("Error: incorrect path for scan directory " + this.settings.Defaults["Scan Directory"])
         return
