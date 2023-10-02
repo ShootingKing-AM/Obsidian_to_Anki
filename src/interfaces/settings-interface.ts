@@ -55,7 +55,7 @@ export interface FileData {
 }
 
 export interface ParsedSettings extends FileData {
-  add_file_link: boolean
+	add_file_link: boolean
 	folder_decks: Record<string, string>
 	folder_tags: Record<string, string>
 }
