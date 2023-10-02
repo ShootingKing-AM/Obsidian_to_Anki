@@ -171,6 +171,10 @@ export class SettingsTab extends PluginSettingTab {
 		const plugin = (this as any).plugin
 		let defaults_settings = containerEl.createEl('h3', {text: 'Defaults'})
 
+		// To account for new scan directory
+		if (!(plugin.settings["Defaults"].hasOwnProperty("Scan Directory"))) {
+			plugin.settings["Defaults"]["Scan Directory"] = ""
+		}
 		// To account for new add context
 		if (!(plugin.settings["Defaults"].hasOwnProperty("Add Context"))) {
 			plugin.settings["Defaults"]["Add Context"] = false
