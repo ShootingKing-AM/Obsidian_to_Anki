@@ -76,7 +76,7 @@ jobs:
       #     name: JUnit Reprot
       #     path: logs/test-reports/wdio.xml
       #     reporter: jest-junit      
-      - uses: iterative/setup-cml@v1
+      - uses: iterative/setup-cml@v2
         if: always()
       
       - name: Publish Screenshots - Find Comment
@@ -284,7 +284,7 @@ jobs:
       #     path: logs/test-reports/wdio.xml
       #     reporter: jest-junit
       
-      - uses: iterative/setup-cml@v1
+      - uses: iterative/setup-cml@v2
         if: always()
       
       - name: Publish Screenshots - Find Comment
