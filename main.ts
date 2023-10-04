@@ -174,7 +174,7 @@ export default class MyPlugin extends Plugin {
 				allTFiles.push(child);
 			} else if (child instanceof TFolder) {
 				// If it's a TFolder, recursively call the function on it
-				const filesInSubfolder = getAllTFilesInFolder(child);
+				const filesInSubfolder = this.getAllTFilesInFolder(child);
 				allTFiles.push(...filesInSubfolder);
 			}
 			// Ignore other types of files or objects

@@ -18,6 +18,7 @@ export interface PluginSettings {
 		"Frozen Fields Line": string
 	},
 	Defaults: {
+		"Scan Directory": string,
 		"Tag": string,
 		"Deck": string,
 		"Scheduling Interval": number

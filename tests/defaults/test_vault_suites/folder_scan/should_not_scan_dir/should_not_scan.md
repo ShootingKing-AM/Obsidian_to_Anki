@@ -1,17 +1,17 @@
-<!-- CARD -->
-# Style
+
+# Style snsmd
 This style is suitable for having the header as the front, and the answer as the back
 # Overall heading
-<!-- CARD -->
-## Subheading 1
+
+## Subheading 1 snsmd
 
 You're allowed to nest headers within each other
-<!-- CARD -->
-## Subheading 2
+
+## Subheading 2 snsmd
 
 It'll take the deepest level for the question
-<!-- CARD -->
-## Subheading 3
+
+## Subheading 3 snsmd
 
 
    

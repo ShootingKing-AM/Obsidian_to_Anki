@@ -28,7 +28,7 @@
       "Frozen Fields Line": "FROZEN"
     },
     "Defaults": {
-      "Scan Directory": "scan_dir",
+      "Scan Directory": "folder_scan/scan_dir",
       "Tag": "Obsidian_to_Anki",
       "Deck": "Default",
       "Scheduling Interval": 0,
