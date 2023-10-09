@@ -38,7 +38,7 @@
         "typescript": "^5.2.2",
         "wdio-chromedriver-service": "^8.1.1",
         "wdio-docker-service": "^3.2.1",
-        "wdio-electron-service": "^4.3.0",
+        "wdio-electron-service": "^5.0.0",
         "wdio-wait-for": "^3.0.7"
     },
     "dependencies": {
