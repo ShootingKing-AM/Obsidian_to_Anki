@@ -2,7 +2,7 @@ name: Test e2e
 
 env:
   PLUGIN_NAME: obsidian-to-anki-plugin
-  NODE_V: '16'
+  NODE_V: '18.x'
 
 on:
   # push:
