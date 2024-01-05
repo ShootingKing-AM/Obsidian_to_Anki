@@ -76,7 +76,10 @@ jobs:
       #     name: JUnit Reprot
       #     path: logs/test-reports/wdio.xml
       #     reporter: jest-junit      
-      - uses: iterative/setup-cml@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - uses: iterative/setup-cml@v1
         if: always()
       
       - name: Publish Screenshots - Find Comment
