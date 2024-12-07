@@ -47,9 +47,10 @@ abstract class AbstractNote {
     formatter: FormatConverter
     curly_cloze: boolean
 	highlights_to_cloze: boolean
+	bold_to_cloze: boolean
 	no_note_type: boolean
 
-    constructor(note_text: string, fields_dict: FIELDS_DICT, curly_cloze: boolean, highlights_to_cloze: boolean, formatter: FormatConverter) {
+    constructor(note_text: string, fields_dict: FIELDS_DICT, curly_cloze: boolean, highlights_to_cloze: boolean, bold_to_cloze: boolean, formatter: FormatConverter) {
         this.text = note_text.trim()
         this.current_field_num = 0
         this.delete = false
@@ -67,6 +68,7 @@ abstract class AbstractNote {
         this.formatter = formatter
         this.curly_cloze = curly_cloze
 		this.highlights_to_cloze = highlights_to_cloze
+		this.bold_to_cloze = bold_to_cloze
     }
 
     abstract getSplitText(): string[]
@@ -163,7 +165,8 @@ export class Note extends AbstractNote {
             fields[key] = this.formatter.format(
                 fields[key].trim(),
                 this.note_type.includes("Cloze") && this.curly_cloze,
-				this.highlights_to_cloze
+				this.highlights_to_cloze,
+                this.bold_to_cloze
             ).trim()
         }
         return fields
@@ -225,7 +228,8 @@ export class InlineNote extends AbstractNote {
             fields[key] = this.formatter.format(
                 fields[key].trim(),
                 this.note_type.includes("Cloze") && this.curly_cloze,
-				this.highlights_to_cloze
+				this.highlights_to_cloze,
+                this.bold_to_cloze
             ).trim()
         }
         return fields
@@ -244,6 +248,7 @@ export class RegexNote {
     field_names: string[]
 	curly_cloze: boolean
 	highlights_to_cloze: boolean
+	bold_to_cloze: boolean
 	formatter: FormatConverter
 
 	constructor(
@@ -254,6 +259,7 @@ export class RegexNote {
 			id: boolean,
 			curly_cloze: boolean,
 			highlights_to_cloze: boolean,
+			bold_to_cloze: boolean,
 			formatter: FormatConverter
 	) {
 		this.match = match
@@ -264,6 +270,7 @@ export class RegexNote {
 		this.curly_cloze = curly_cloze
 		this.formatter = formatter
 		this.highlights_to_cloze = highlights_to_cloze
+		this.bold_to_cloze = bold_to_cloze
 	}
 
 	getFields(): Record<string, string> {
@@ -278,7 +285,8 @@ export class RegexNote {
             fields[key] = this.formatter.format(
                 fields[key].trim(),
                 this.note_type.includes("Cloze") && this.curly_cloze,
-				this.highlights_to_cloze
+				this.highlights_to_cloze,
+                this.bold_to_cloze
             ).trim()
         }
         return fields

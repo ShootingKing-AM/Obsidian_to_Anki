@@ -8,6 +8,7 @@ import showdownHighlight from 'showdown-highlight'
 
 const ANKI_MATH_REGEXP:RegExp = /(\\\[[\s\S]*?\\\])|(\\\([\s\S]*?\\\))/g
 const HIGHLIGHT_REGEXP:RegExp = /==(.*?)==/g
+const BOLD_REGEXP:RegExp = /\*\*(.*?)\*\*/g
 
 const MATH_REPLACE:string = "OBSTOANKIMATH"
 const INLINE_CODE_REPLACE:string = "OBSTOANKICODEINLINE"
@@ -143,7 +144,7 @@ export class FormatConverter {
 		return note_text
 	}
 
-	format(note_text: string, cloze: boolean, highlights_to_cloze: boolean): string {
+	format(note_text: string, cloze: boolean, highlights_to_cloze: boolean, bold_to_cloze: boolean): string {
 		note_text = this.obsidian_to_anki_math(note_text)
 		//Extract the parts that are anki math
 		let math_matches: string[]
@@ -157,6 +158,9 @@ export class FormatConverter {
 			if (highlights_to_cloze) {
 				note_text = note_text.replace(HIGHLIGHT_REGEXP, "{$1}")
 			}
+            if (bold_to_cloze) {
+                note_text = note_text.replace(BOLD_REGEXP, "{$1}"); 
+            }
 			note_text = this.curly_to_cloze(note_text)
 		}
 		note_text = this.getAndFormatMedias(note_text)
