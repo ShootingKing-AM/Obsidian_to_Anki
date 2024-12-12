@@ -45,6 +45,7 @@ export interface FileData {
 	FROZEN_REGEXP: RegExp
 	DECK_REGEXP: RegExp
 	TAG_REGEXP: RegExp
+	MULTILINE_TAG_REGEXP: RegExp
 	NOTE_REGEXP: RegExp
 	INLINE_REGEXP: RegExp
 	EMPTY_REGEXP: RegExp

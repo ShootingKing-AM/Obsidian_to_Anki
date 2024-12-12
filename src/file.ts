@@ -135,8 +135,17 @@ abstract class AbstractFile {
     }
 
     setup_global_tags() {
-        const result = this.file.match(this.data.TAG_REGEXP)
-        this.global_tags = result ? result[1] : ""
+        let result = this.file.match(this.data.TAG_REGEXP)
+        if (result) {
+            this.global_tags = result[1];
+        } else {
+            result = this.file.match(this.data.MULTILINE_TAG_REGEXP)
+            this.global_tags = result ? result[1]
+                .replaceAll('-', '')
+                .replaceAll('\n', '')
+                .replaceAll(/\s+/g, ' ')
+                .trim() : "";
+        }
     }
 
     getHash(): string {
@@ -286,35 +295,9 @@ export class AllFile extends AbstractFile {
 
     setupScan() {
         this.setup_frozen_fields_dict()
-    
-        // Use YAML values if present, otherwise fall back to regex functions
-        const frontmatter = this.file_cache.frontmatter;
-        if (frontmatter) {
-             // Use regex function if not in YAML
-            if (frontmatter.hasOwnProperty("TARGET DECK")) {
-                this.target_deck = frontmatter["TARGET DECK"] as string;
-            } else {
-                this.setup_target_deck();
-            }
-            if (frontmatter.hasOwnProperty("FILE TAGS")) {
-                this.global_tags = frontmatter["FILE TAGS"] as string;
-            } else {
-                this.setup_global_tags();
-            }
-
-            // Add frontmatter span to ignore_spans ONLY if position is defined
-            if (frontmatter.position) { 
-                this.ignore_spans = [[frontmatter.position.start.offset, frontmatter.position.end.offset]];
-            } else {
-                this.ignore_spans = [];
-            }
-        } else {
-            // No frontmatter, so use regex functions for both
-            this.setup_target_deck();
-            this.setup_global_tags();
-            this.ignore_spans = [];
-        }
-
+        this.setup_target_deck();
+        this.setup_global_tags();
+        this.ignore_spans = [];
         this.add_spans_to_ignore()
         this.notes_to_add = []
         this.inline_notes_to_add = []
