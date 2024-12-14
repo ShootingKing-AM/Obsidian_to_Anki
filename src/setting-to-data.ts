@@ -41,6 +41,7 @@ export async function settingToData(app: App, settings: PluginSettings, fields_d
     result.highlights_to_cloze = settings.Defaults["CurlyCloze - Highlights to Clozes"]
     result.bold_to_cloze = settings.Defaults["CurlyCloze - Bold text to Clozes"]
     result.add_file_link = settings.Defaults["Add File Link"]
+    result.multiple_cloze_to_card = settings.Defaults["Disable Cloze Card Seperation"]
     result.comment = settings.Defaults["ID Comments"]
     result.add_context = settings.Defaults["Add Context"]
     result.add_obs_tags = settings.Defaults["Add Obsidian Tags"]

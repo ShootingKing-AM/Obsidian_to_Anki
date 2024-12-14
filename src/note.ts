@@ -48,9 +48,10 @@ abstract class AbstractNote {
     curly_cloze: boolean
 	highlights_to_cloze: boolean
 	bold_to_cloze: boolean
+    multiple_cloze_to_card: boolean
 	no_note_type: boolean
 
-    constructor(note_text: string, fields_dict: FIELDS_DICT, curly_cloze: boolean, highlights_to_cloze: boolean, bold_to_cloze: boolean, formatter: FormatConverter) {
+    constructor(note_text: string, fields_dict: FIELDS_DICT, curly_cloze: boolean, highlights_to_cloze: boolean, bold_to_cloze: boolean, multiple_cloze_to_card: boolean, formatter: FormatConverter) {
         this.text = note_text.trim()
         this.current_field_num = 0
         this.delete = false
@@ -69,6 +70,7 @@ abstract class AbstractNote {
         this.curly_cloze = curly_cloze
 		this.highlights_to_cloze = highlights_to_cloze
 		this.bold_to_cloze = bold_to_cloze
+        this.multiple_cloze_to_card = multiple_cloze_to_card
     }
 
     abstract getSplitText(): string[]
@@ -166,7 +168,8 @@ export class Note extends AbstractNote {
                 fields[key].trim(),
                 this.note_type.includes("Cloze") && this.curly_cloze,
 				this.highlights_to_cloze,
-                this.bold_to_cloze
+                this.bold_to_cloze,
+                this.multiple_cloze_to_card
             ).trim()
         }
         return fields
@@ -229,7 +232,8 @@ export class InlineNote extends AbstractNote {
                 fields[key].trim(),
                 this.note_type.includes("Cloze") && this.curly_cloze,
 				this.highlights_to_cloze,
-                this.bold_to_cloze
+                this.bold_to_cloze,
+                this.multiple_cloze_to_card
             ).trim()
         }
         return fields
@@ -249,6 +253,7 @@ export class RegexNote {
 	curly_cloze: boolean
 	highlights_to_cloze: boolean
 	bold_to_cloze: boolean
+    multiple_cloze_to_card: boolean
 	formatter: FormatConverter
 
 	constructor(
@@ -260,6 +265,7 @@ export class RegexNote {
 			curly_cloze: boolean,
 			highlights_to_cloze: boolean,
 			bold_to_cloze: boolean,
+            multiple_cloze_to_card: boolean,
 			formatter: FormatConverter
 	) {
 		this.match = match
@@ -271,6 +277,7 @@ export class RegexNote {
 		this.formatter = formatter
 		this.highlights_to_cloze = highlights_to_cloze
 		this.bold_to_cloze = bold_to_cloze
+        this.multiple_cloze_to_card = multiple_cloze_to_card
 	}
 
 	getFields(): Record<string, string> {
@@ -286,7 +293,8 @@ export class RegexNote {
                 fields[key].trim(),
                 this.note_type.includes("Cloze") && this.curly_cloze,
 				this.highlights_to_cloze,
-                this.bold_to_cloze
+                this.bold_to_cloze,
+                this.multiple_cloze_to_card
             ).trim()
         }
         return fields

@@ -27,6 +27,7 @@ export interface PluginSettings {
 		"CurlyCloze": boolean,
 		"CurlyCloze - Highlights to Clozes": boolean,
         "CurlyCloze - Bold text to Clozes": boolean,
+        "Disable Cloze Card Seperation": boolean,
 		"ID Comments": boolean,
 		"Add Obsidian Tags": boolean
 	}
@@ -53,6 +54,7 @@ export interface FileData {
 	curly_cloze: boolean
 	highlights_to_cloze: boolean
     bold_to_cloze: boolean
+    multiple_cloze_to_card: boolean
 	comment: boolean
 	add_context: boolean
 	add_obs_tags: boolean

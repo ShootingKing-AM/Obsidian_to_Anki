@@ -23,6 +23,7 @@ const PARA_OPEN:string = "<p>"
 const PARA_CLOSE:string = "</p>"
 
 let cloze_unset_num: number = 1
+let multiple_cloze_to_card: boolean = false
 
 let converter: Converter = new Converter({
 	simplifiedAutoLink: true,
@@ -80,17 +81,21 @@ export class FormatConverter {
 	cloze_repl(_1: string, match_id: string, match_content: string): string {
 		if (match_id == undefined) {
 			let result = "{{c" + cloze_unset_num.toString() + "::" + match_content + "}}"
-			cloze_unset_num += 1
+            if (!multiple_cloze_to_card) {
+                cloze_unset_num += 1
+            }
 			return result
 		}
 		let result = "{{c" + match_id + "::" + match_content + "}}"
 		return result
 	}
 
-	curly_to_cloze(text: string): string {
+	curly_to_cloze(text: string, multiple_cloze: boolean): string {
+        multiple_cloze_to_card = multiple_cloze
 		/*Change text in curly brackets to Anki-formatted cloze.*/
 		text = text.replace(CLOZE_REGEXP, this.cloze_repl)
 		cloze_unset_num = 1
+        multiple_cloze_to_card = false
 		return text
 	}
 
@@ -144,7 +149,7 @@ export class FormatConverter {
 		return note_text
 	}
 
-	format(note_text: string, cloze: boolean, highlights_to_cloze: boolean, bold_to_cloze: boolean): string {
+	format(note_text: string, cloze: boolean, highlights_to_cloze: boolean, bold_to_cloze: boolean, multiple_cloze_to_card: boolean): string {
 		note_text = this.obsidian_to_anki_math(note_text)
 		//Extract the parts that are anki math
 		let math_matches: string[]
@@ -161,12 +166,14 @@ export class FormatConverter {
             if (bold_to_cloze) {
                 note_text = note_text.replace(BOLD_REGEXP, "{$1}"); 
             }
-			note_text = this.curly_to_cloze(note_text)
+			note_text = this.curly_to_cloze(note_text, multiple_cloze_to_card)
 		}
 		note_text = this.getAndFormatMedias(note_text)
 		note_text = this.formatLinks(note_text)
 		//Special for formatting highlights now, but want to avoid any == in code
 		note_text = note_text.replace(HIGHLIGHT_REGEXP, String.raw`<mark>$1</mark>`)
+		//Special for formatting highlights now, but want to avoid any == in code
+		note_text = note_text.replace(BOLD_REGEXP, String.raw`<mark>$1</mark>`)
 		note_text = this.decensor(note_text, DISPLAY_CODE_REPLACE, display_code_matches, false)
 		note_text = this.decensor(note_text, INLINE_CODE_REPLACE, inline_code_matches, false)
 		note_text = converter.makeHtml(note_text)
