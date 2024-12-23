@@ -271,6 +271,11 @@ export class RegexNote {
 		this.match = match
 		this.note_type = note_type
 		this.identifier = id ? parseInt(this.match.pop()) : null
+        if (this.match) {
+            this.groups = this.match.slice(1).filter(item => item !== undefined); // Filter out undefined groups
+        } else {
+            this.groups = []; // Default to empty array if no match
+        }
 		this.tags = tags ? this.match.pop().slice(TAG_PREFIX.length).split(TAG_SEP) : []
 		this.field_names = fields_dict[note_type]
 		this.curly_cloze = curly_cloze
@@ -285,6 +290,18 @@ export class RegexNote {
         for (let field of this.field_names) {
             fields[field] = ""
         }
+
+        if (this.groups.length > 0) {
+        // Check if the first alternative matched (Cloze note)
+        if (this.groups[0] !== undefined) {
+            fields[this.field_names[0]] = this.groups[0].trim(); // Main content of Cloze
+        } else if (this.groups[1] !== undefined) {
+            // The second alternative matched (Important note)
+            // Assign content to the appropriate field based on your note type
+            fields[this.field_names[0]] = this.groups[1].trim();
+        }
+    }
+
 		for (let index in this.match.slice(1)) {
 			fields[this.field_names[index]] = this.match.slice(1)[index] ? this.match.slice(1)[index] : ""
 		}

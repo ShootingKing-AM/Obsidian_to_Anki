@@ -164,16 +164,16 @@ export class FormatConverter {
 				note_text = note_text.replace(HIGHLIGHT_REGEXP, "{$1}")
 			}
             if (bold_to_cloze) {
-                note_text = note_text.replace(BOLD_REGEXP, "{$1}"); 
+                note_text = note_text.replace(BOLD_REGEXP, "{$1}");
             }
 			note_text = this.curly_to_cloze(note_text, multiple_cloze_to_card)
 		}
 		note_text = this.getAndFormatMedias(note_text)
 		note_text = this.formatLinks(note_text)
+
 		//Special for formatting highlights now, but want to avoid any == in code
 		note_text = note_text.replace(HIGHLIGHT_REGEXP, String.raw`<mark>$1</mark>`)
-		//Special for formatting highlights now, but want to avoid any == in code
-		note_text = note_text.replace(BOLD_REGEXP, String.raw`<mark>$1</mark>`)
+
 		note_text = this.decensor(note_text, DISPLAY_CODE_REPLACE, display_code_matches, false)
 		note_text = this.decensor(note_text, INLINE_CODE_REPLACE, inline_code_matches, false)
 		note_text = converter.makeHtml(note_text)
