@@ -10,6 +10,8 @@ const defaultDescs = {
 	"Add Context": "Append 'context' for the card, in the form of path > heading > heading etc, to the field specified in the table.",
 	"CurlyCloze": "Convert {cloze deletions} -> {{c1::cloze deletions}} on note types that have a 'Cloze' in their name.",
 	"CurlyCloze - Highlights to Clozes": "Convert ==highlights== -> {highlights} to be processed by CurlyCloze.",
+	"CurlyCloze - Bold text to Clozes": "Convert **bold text** -> {bold text} to be processed by CurlyCloze.",
+    "Disable Cloze Card Seperation" : "Doesn't change cloze numbers if enabled.",
 	"ID Comments": "Wrap note IDs in a HTML comment.",
 	"Add Obsidian Tags": "Interpret #tags in the fields of a note as Anki tags, removing them from the note text in Anki."
 }
