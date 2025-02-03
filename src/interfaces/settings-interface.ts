@@ -26,6 +26,8 @@ export interface PluginSettings {
 		"Add Context": boolean,
 		"CurlyCloze": boolean,
 		"CurlyCloze - Highlights to Clozes": boolean,
+        "CurlyCloze - Bold text to Clozes": boolean,
+        "Disable Cloze Card Seperation": boolean,
 		"ID Comments": boolean,
 		"Add Obsidian Tags": boolean
 	}
@@ -44,12 +46,15 @@ export interface FileData {
 	FROZEN_REGEXP: RegExp
 	DECK_REGEXP: RegExp
 	TAG_REGEXP: RegExp
+	MULTILINE_TAG_REGEXP: RegExp
 	NOTE_REGEXP: RegExp
 	INLINE_REGEXP: RegExp
 	EMPTY_REGEXP: RegExp
 
 	curly_cloze: boolean
 	highlights_to_cloze: boolean
+    bold_to_cloze: boolean
+    multiple_cloze_to_card: boolean
 	comment: boolean
 	add_context: boolean
 	add_obs_tags: boolean

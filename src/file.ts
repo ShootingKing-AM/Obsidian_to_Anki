@@ -121,6 +121,8 @@ abstract class AbstractFile {
                 this.data.fields_dict,
                 this.data.curly_cloze,
                 this.data.highlights_to_cloze,
+                this.data.bold_to_cloze,
+                this.data.multiple_cloze_to_card,
                 this.formatter
             ).getFields()
             frozen_fields_dict[note_type] = parsed_fields
@@ -134,8 +136,17 @@ abstract class AbstractFile {
     }
 
     setup_global_tags() {
-        const result = this.file.match(this.data.TAG_REGEXP)
-        this.global_tags = result ? result[1] : ""
+        let result = this.file.match(this.data.TAG_REGEXP)
+        if (result) {
+            this.global_tags = result[1];
+        } else {
+            result = this.file.match(this.data.MULTILINE_TAG_REGEXP)
+            this.global_tags = result ? result[1]
+                .replaceAll('-', '')
+                .replaceAll('\n', '')
+                .replaceAll(/\s+/g, ' ')
+                .trim() : "";
+        }
     }
 
     getHash(): string {
@@ -285,8 +296,9 @@ export class AllFile extends AbstractFile {
 
     setupScan() {
         this.setup_frozen_fields_dict()
-        this.setup_target_deck()
-        this.setup_global_tags()
+        this.setup_target_deck();
+        this.setup_global_tags();
+        this.ignore_spans = [];
         this.add_spans_to_ignore()
         this.notes_to_add = []
         this.inline_notes_to_add = []
@@ -307,6 +319,8 @@ export class AllFile extends AbstractFile {
                 this.data.fields_dict,
                 this.data.curly_cloze,
                 this.data.highlights_to_cloze,
+                this.data.bold_to_cloze,
+                this.data.multiple_cloze_to_card,
                 this.formatter
             ).parse(
                 this.target_deck,
@@ -345,6 +359,8 @@ export class AllFile extends AbstractFile {
                 this.data.fields_dict,
                 this.data.curly_cloze,
                 this.data.highlights_to_cloze,
+                this.data.bold_to_cloze,
+                this.data.multiple_cloze_to_card,
                 this.formatter
             ).parse(
                 this.target_deck,
@@ -383,7 +399,7 @@ export class AllFile extends AbstractFile {
                     this.ignore_spans.push([match.index, match.index + match[0].length])
                     const parsed: AnkiConnectNoteAndID = new RegexNote(
                         match, note_type, this.data.fields_dict,
-                        search_tags, search_id, this.data.curly_cloze, this.data.highlights_to_cloze, this.formatter
+                        search_tags, search_id, this.data.curly_cloze, this.data.highlights_to_cloze, this.data.bold_to_cloze, this.data.multiple_cloze_to_card, this.formatter
                     ).parse(
                         this.target_deck,
                         this.url,
